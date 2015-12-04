@@ -1,4 +1,4 @@
-// Contact page module. 
+// Contact page module.
 // Contact info should be configured in a appConfig angular constant
 //
 // E.g.
@@ -19,6 +19,7 @@ var MODULE_NAME = 'contact';
 module.exports = MODULE_NAME;
 
 angular.module(MODULE_NAME, [
+  require('angular-ui-router'),
   require('../shared')
 ])
 
