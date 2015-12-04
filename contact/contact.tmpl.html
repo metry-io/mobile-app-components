@@ -6,21 +6,20 @@
       <ion-item
         class="item-icon-right"
         ng-if="ctrl.config.phone"
-        ng-href="tel://{ctrl.config.phone }"
-        ng-bind-html="ctrl.config.phoneDisplay | mryTrust">
+        ng-href="tel://{ctrl.config.phone }">
+        <span ng-bind-html="ctrl.config.phoneDisplay | mryTrust"></span>
         <i class="icon ion-ios-telephone-outline"></i>
       </ion-item>
-      <div class="item item-divider" ng-if="config.config.mail" translate>Mail</div>
+      <div class="item item-divider" ng-if="ctrl.config.mail" translate>Mail</div>
       <ion-item
         class="item-icon-right"
         ng-if="ctrl.config.mail"
-        ng-href="mailto:{{ctrl.config.mail }}"
-        ng-bind-html="ctrl.config.mail | mryTrust">
+        ng-href="mailto:{{ctrl.config.mail }}">
+        <span ng-bind-html="ctrl.config.mail | mryTrust"></span>
         <i class="icon ion-ios-email-outline"></i>
       </ion-item>
       <div class="item item-divider" ng-if="ctrl.config.address" translate>Adress</div>
       <ion-item
-        class="item-icon-right"
         ng-if="ctrl.config.address"
         ng-bind-html="ctrl.config.address | mryTrust">
       </ion-item>
