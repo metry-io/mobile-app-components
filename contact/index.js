@@ -19,9 +19,7 @@ var MODULE_NAME = 'contact';
 module.exports = MODULE_NAME;
 
 angular.module(MODULE_NAME, [
-  require('angular-ui-router'),
   require('../shared')
 ])
 
-.controller('ContactController', require('./contact.ctrl.js'))
-.config(require('./contact.state.js'));
+.controller('ContactController', require('./contact.ctrl.js'));
