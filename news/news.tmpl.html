@@ -1,0 +1,21 @@
+<ion-view view-title="{{ 'Nyheter' | translate }}">
+  <div class="row row-center" ng-if="ctrl.firstLoading" style="height: 100%">
+    <div class="col text-center">
+      <ion-spinner></ion-spinner>
+    </div>
+  </div>
+  <ion-content overflow-scroll="true">
+    <ion-refresher
+      pulling-text="{{ 'Dra för att ladda nya inlägg' | translate }}"
+      on-refresh="ctrl.loadEntries()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item
+        collection-repeat="entry in ctrl.entries"
+        ng-click="ctrl.selectEntry(entry)">
+        <h2 ng-bind="entry[ctrl.config.titleKey]"></h2>
+        <p ng-bind-html="entry[ctrl.config.contentKey]"></p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
