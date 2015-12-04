@@ -1,0 +1,30 @@
+<ion-view view-title="{{'Kontakta oss' | translate }}">
+  <ion-content overflow-scroll="true">
+    <img src="img/contact-us.jpg" width="100%" height="auto">
+    <div class="list">
+      <div class="item item-divider" ng-if="ctrl.config.phone" translate>Telefon</div>
+      <ion-item
+        class="item-icon-right"
+        ng-if="ctrl.config.phone"
+        ng-href="tel://{ctrl.config.phone }"
+        ng-bind-html="ctrl.config.phoneDisplay | mryTrust">
+        <i class="icon ion-ios-telephone-outline"></i>
+      </ion-item>
+      <div class="item item-divider" ng-if="config.config.mail" translate>Mail</div>
+      <ion-item
+        class="item-icon-right"
+        ng-if="ctrl.config.mail"
+        ng-href="mailto:{{ctrl.config.mail }}"
+        ng-bind-html="ctrl.config.mail | mryTrust">
+        <i class="icon ion-ios-email-outline"></i>
+      </ion-item>
+      <div class="item item-divider" ng-if="ctrl.config.address" translate>Adress</div>
+      <ion-item
+        class="item-icon-right"
+        ng-if="ctrl.config.address"
+        ng-bind-html="ctrl.config.address | mryTrust">
+      </ion-item>
+    </div>
+    <p class="text-center padding-vertical" translate>Version {{ ctrl.version }}</p>
+  </ion-content>
+</ion-view>
