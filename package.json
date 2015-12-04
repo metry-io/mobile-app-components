@@ -1,0 +1,33 @@
+{
+  "name": "metry-mobile-app-components",
+  "version": "0.1.0",
+  "description": "Ionic components that make up the Metry mobile apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metry-io/mobile-app-components.git"
+  },
+  "keywords": [
+    "metry",
+    "ionic",
+    "cordova",
+    "angular"
+  ],
+  "author": "Torsten Freyhall <torsten.freyhall@metry.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metry-io/mobile-app-components/issues"
+  },
+  "homepage": "https://github.com/metry-io/mobile-app-components#readme",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-animate": "^1.4.8",
+    "angular-gettext": "^2.1.2",
+    "angular-sanitize": "^1.4.8",
+    "angular-ui-router": "^0.2.15",
+    "ionic-sdk": "^1.1.0"
+  }
+}
