@@ -1,0 +1,109 @@
+// Chart colors
+$mry-bar-fill-electricity: $positive;
+$mry-bar-fill-heat: $assertive;
+$mry-bar-fill-production: $royal;
+$mry-grid-stroke: lightgrey;
+$mry-label-x-color: black;
+$mry-label-y-color-bg: $dark;
+$mry-label-y-color: $stable;
+
+// Dimensions
+$chart-height: 200px;
+$labelsx-height: 22px;
+
+.mry-consumption-chart {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+
+  .mry-loading-placeholder {
+    height: 222px;
+    width: 100%;
+  }
+
+  svg.mry-chart {
+    position: relative;
+    display: block;
+    height: $chart-height;
+    width: 100%;
+
+
+    line.gridline {
+      stroke: $mry-grid-stroke;
+      stroke-width: 1px;
+    }
+
+    rect.electricity {
+      fill: $mry-bar-fill-electricity;
+    }
+
+    rect.heat {
+      fill: $mry-bar-fill-heat;
+    }
+
+    rect.production {
+      fill: $mry-bar-fill-production;
+    }
+  }
+
+  .labelsX {
+    position: relative;
+    padding: 0 12px 0 24px;
+    width: 100%;
+    height: $labelsx-height;
+
+    .labelX {
+      position: absolute;
+      top: 0px;
+      font-size: 9px;
+      color: $mry-label-x-color;
+      padding: 2px 4px;
+      border-left: 1px solid $mry-grid-stroke;
+      box-sizing: content-box;
+    }
+  }
+
+  .labelsY {
+    position: absolute;
+    top: 3px;
+    left: 0px;
+    height: $chart-height + 14;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+
+    .labelY {
+      padding: 0 7px 0 2px;
+      font-size: 11px;
+      line-height: 14px;
+      background-color: $mry-label-y-color-bg;
+      color: $mry-label-y-color;
+      border-radius: 0;
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+    }
+  }
+}
+
+.chart-legend {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+
+  &.electricity {
+    background-color: $mry-bar-fill-electricity;
+  }
+
+  &.heat {
+    background-color: $mry-bar-fill-heat;
+  }
+
+  &.production {
+    background-color: $mry-bar-fill-production;
+  }
+}

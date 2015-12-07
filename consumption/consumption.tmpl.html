@@ -1,0 +1,129 @@
+<ion-view view-title="Min användning">
+  <ion-nav-buttons side="secondary">
+    <button class="button button-clear icon ion-eye" ng-click='ctrl.showViewToggles()'></button>
+  </ion-nav-buttons>
+
+  <div class="tabs tabs-striped tabs-positive tabs-top">
+    <a
+      href=""
+      ng-click="ctrl.setView('day')"
+      class="tab-item"
+      ng-class="{'tab-item-active': ctrl.view === 'day'}" translate>Dygn</a>
+    <a
+      href=""
+      ng-click="ctrl.setView('week')"
+      class="tab-item"
+      ng-class="{'tab-item-active': ctrl.view === 'week'}" translate>Vecka</a>
+    <a
+      href=""
+      ng-click="ctrl.setView('month')"
+      class="tab-item"
+      ng-class="{'tab-item-active': ctrl.view === 'month'}" translate>Månad</a>
+    <a
+      href=""
+      ng-click="ctrl.setView('year')"
+      class="tab-item"
+      ng-class="{'tab-item-active': ctrl.view === 'year'}" translate>År</a>
+  </div>
+
+  <ion-content scroll="false" class="mry-consumption has-subheader">
+    <div ng-if="ctrl.hasData === false">
+      <h2 translate>Ingen data tillgänglig</h2>
+      <div ng-switch="ctrl.view">
+        <p ng-switch-when="day" translate>Det finns inga timvärden för de valda anläggningarna.</p>
+        <p ng-switch-when="week" translate>Det finns inga dygnsvärden för de valda anläggningarna.</p>
+        <p ng-switch-when="month" translate>Det finns inga dygnsvärden för de valda anläggningarna.</p>
+        <p ng-switch-when="year" translate>Det finns inga månadsvärden för de valda anläggningarna.</p>
+      </div>
+    </div>
+
+    <dynabox
+      get-data="ctrl.getData($index)"
+      slide-scope="{ctrl: ctrl}"
+      ng-if="ctrl.hasData === true"
+      style="height:100%"
+      initialSlide="0">
+      <slide-template>
+        <ion-content
+          class="padding-top mry-consumption-slide"
+          overflow-scroll="true"
+          style="width: 100vw; height: 100%">
+          <div style="height: 242px; display: block; overflow: hidden; position: relative">
+            <mry-consumption-chart
+              mry-data="data.data"
+              mry-view="{{ ctrl.view }}"
+              mry-start-date="data.date"
+              mry-max="{{ ctrl.getChartMax(data) }}"
+              mry-min="{{ ctrl.getChartMin(data) }}"></mry-consumption-chart>
+          </div>
+
+          <div
+            class="row row-center padding-vertical"
+            style="padding-left: 0px; padding-right: 0px">
+            <div class="col">
+              <button
+                class="button button-positive"
+                ng-click="ctrl.previous()"
+                ng-disabled="data.isFirst">
+                <i class="icon ion-android-arrow-back"></i>
+              </button>
+            </div>
+            <div class="col-50" ng-switch="ctrl.view">
+              <button
+                class="button button-block icon-right button-positive ion-calendar text-center"
+                ng-click="ctrl.selectDate()">{{ data.dateString }}</button>
+            </div>
+            <div class="col text-right">
+              <button
+                class="button button-positive"
+                ng-click="ctrl.next()"
+                ng-disabled="data.offset === 0">
+                <i class="icon ion-android-arrow-forward"></i>
+              </button>
+            </div>
+          </div>
+
+          <div ng-if="ctrl.meters.production.selected" class="mry-card-group">
+            <mry-consumption-card
+              mry-icon-class="ion-flash"
+              mry-header-text="Produktion el"
+              mry-value="data.sum.energy.production"
+              mry-value-unit="kWh"></mry-consumption-card>
+          </div>
+
+          <div ng-if="ctrl.meters.electricity.selected" class="mry-card-group">
+            <mry-consumption-card
+              mry-icon-class="ion-flash"
+              mry-header-text="Användning el"
+              mry-value="data.sum.energy.electricity"
+              mry-value-unit="kWh"></mry-consumption-card>
+
+            <mry-consumption-card
+              mry-icon-class="ion-cash"
+              mry-header-text="Kostnad el"
+              mry-value="data.sum.cost.electricity"
+              mry-value-unit="kr"
+              mry-value-null-text="Tryck här för att ställa in priser"
+              mry-sref="{{ 'price-electricity({meterId: \'' +  ctrl.meters.electricity._id + '\'})' }}"></mry-consumption-card>
+          </div>
+
+          <div ng-if="ctrl.meters.heat.selected" class="mry-card-group">
+            <mry-consumption-card
+              mry-icon-class="ion-home"
+              mry-header-text="Användning fjärrvärme"
+              mry-value="data.sum.energy.heat"
+              mry-value-unit="kWh"></mry-consumption-card>
+
+            <mry-consumption-card
+              mry-icon-class="ion-cash"
+              mry-header-text="Kostnad fjärrvärme"
+              mry-value="data.sum.cost.heat"
+              mry-value-unit="kr"
+              mry-value-null-text="Tryck här för att ställa in priser"
+              mry-sref="{{ 'price-heat({meterId: \'' +  ctrl.meters.heat._id + '\'})' }}"></mry-consumption-card>
+          </div>
+        </ion-content>
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-view>

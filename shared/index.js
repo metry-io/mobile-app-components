@@ -3,4 +3,6 @@ module.exports = MODULE_NAME;
 
 angular.module(MODULE_NAME, [])
 
-.filter('mryTrust', require('./trust.filter.js'));
+.factory('mryLocalStorage', require('./local-storage.service.js'))
+.filter('mryTrust', require('./trust.filter.js'))
+.directive('dynabox', require('./dynabox.directive.js'));

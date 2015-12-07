@@ -1,0 +1,6 @@
+{
+  "day": "hour",
+  "week": "day",
+  "month": "day",
+  "year": "month"
+}

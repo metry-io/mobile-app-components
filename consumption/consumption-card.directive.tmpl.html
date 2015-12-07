@@ -1,0 +1,29 @@
+<div class="card mry-consumption-card">
+  <ion-item ng-if="ctrl.uiSref" class="item-icon-left" ui-sref="{{ ctrl.uiSref }}">
+    <i
+      ng-if="ctrl.iconClass"
+      ng-class="ctrl.iconClass"
+      class="icon mry-consumption-card-icon"></i>
+    <h2>{{ ctrl.headerText }}</h2>
+    <div ng-switch="ctrl.value">
+      <p ng-switch-when="null">{{ ctrl.valueNullText }}</p>
+      <p ng-switch-when="undefined">?</p>
+      <p ng-switch-default>{{ ctrl.value | number:0 }} {{ ctrl.valueUnit }}</p>
+    </div>
+    <i
+      ng-if="ctrl.uiSref.length > 0"
+      class="ion-more mry-tap-indicator"></i>
+  </ion-item>
+  <ion-item ng-if="!ctrl.uiSref" class="item-icon-left">
+    <i
+      ng-if="ctrl.iconClass"
+      ng-class="ctrl.iconClass"
+      class="icon mry-consumption-card-icon"></i>
+    <h2>{{ ctrl.headerText }}</h2>
+    <div ng-switch="ctrl.value">
+      <p ng-switch-when="null">{{ ctrl.valueNullText }}</p>
+      <p ng-switch-when="undefined">?</p>
+      <p ng-switch-default>{{ ctrl.value | number:0 }} {{ ctrl.valueUnit }}</p>
+    </div>
+  </ion-item>
+</div>

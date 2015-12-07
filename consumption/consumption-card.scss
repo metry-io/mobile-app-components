@@ -1,0 +1,47 @@
+$mry-consumption-card-color-bg: $stable;
+$mry-consumption-card-color: $dark;
+
+.card.mry-consumption-card {
+  margin: 5px;
+  border: 1px solid darken($mry-consumption-card-color-bg, 2%);
+  border-radius: 2px;
+  background-color: $mry-consumption-card-color-bg;
+
+  .item {
+    background-color: transparent;
+    color: $mry-consumption-card-color;
+
+    &.tabs.tabs-secondary {
+      border-top: 1px solid $mry-consumption-card-color-bg;
+    }
+
+    .item-content {
+      background-color: transparent;
+
+      &.activated {
+        background-color: darken($mry-consumption-card-color-bg, 2%);
+      }
+    }
+
+    h2, p {
+      color: $mry-consumption-card-color;
+      white-space: normal;
+    }
+
+    h2 {
+      text-transform: uppercase;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+  }
+
+  .mry-tap-indicator {
+    position: absolute;
+    bottom: -2px;
+    right: 6px;
+  }
+}
+
+.mry-card-group {
+  padding-bottom: 10px;
+}

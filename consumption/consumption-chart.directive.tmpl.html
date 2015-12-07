@@ -1,0 +1,13 @@
+<div class="mry-consumption-chart">
+  <div ng-show="ctrl.data">
+    <svg class="mry-chart"></svg>
+    <div class="mry-labels"></div>
+  </div>
+  <div
+     class="mry-loading-placeholder row"
+     ng-show="!ctrl.data">
+    <div class="col col-center text-center">
+      <ion-spinner></ion-spinner>
+    </div>
+  </div>
+</div>
