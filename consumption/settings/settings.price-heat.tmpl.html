@@ -1,0 +1,25 @@
+<ion-view view-title="{{'Priser' | translate }}">
+  <ion-content overflow-scroll="true" class="mry-settings mry-settings-price-heat">
+    <div class="padding text-center" ng-if="ctrl.loading">
+      <ion-spinner></ion-spinner>
+    </div>
+    <ion-list ng-show="!ctrl.loading">
+      <div class="item item-divider" translate>Välj abonnemangstyp</div>
+
+      <p class="padding" ng-if="!ctrl.loading && (!ctrl.models || ctrl.models.length === 0)" translate>
+        Ditt fjärrvärmebolag har inga abonnemangstyper registrerade hos Metry.
+      </p>
+
+      <ion-item
+        class="item-icon-right"
+        ng-repeat="model in ctrl.models | orderBy:'name'"
+        href=""
+        ng-click="ctrl.selectModel(model)">
+        {{ model.name }}
+        <i
+          ng-show="model._id === ctrl.modelId"
+          class="icon icon-accessory ok-icon-orange ion-checkmark-round"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,151 @@
+<ion-view view-title="{{ 'Mina mätpunkter' | translate }}">
+  <ion-content class="mry-settings" overflow-scroll="true">
+    <div class="padding" ng-if="ctrl.isFirst">
+      <h2 translate>Välkommen!</h2>
+      <p translate>
+        Vi har automatiskt försökt att lista ut vilka mätpunkter som tillhör ditt hem. Du kan ändra dem här nedanför. Du kan även ställa in dina nät- och elhandelspriser för att visa kostnader.</p>
+      <p translate>Tryck på <i>Visa användning</i> längst ned när du är klar.</p>
+    </div>
+
+    <p class="padding" ng-if="!ctrl.isFirst" translate>
+      Här kan du välja vilka mätpunkter som ska visas i appen. Du kan även ställa in dina nät- och elhandelspriser för att visa kostnader.</p>
+    </p>
+
+    <ion-list>
+      <div class="item item-divider" translate>Visa i graferna</div>
+      <ion-item
+        ng-if="ctrl.config.meters.electricity"
+        href=""
+        class="item-icon-left item-icon-right"
+        ng-click="ctrl.config.toggleSelected('electricity')">
+        <i class="icon"><span class="chart-legend electricity">&nbsp;</span></i>
+        <span translate>El</span>
+        <i
+          class="icon ion-checkmark-round icon-accessory"
+          ng-show="ctrl.config.meters.electricity.selected"></i>
+      </ion-item>
+      <ion-item
+        ng-if="ctrl.config.meters.heat"
+        href=""
+        class="item-icon-left item-icon-right"
+        ng-click="ctrl.config.toggleSelected('heat')">
+        <i class="icon"><span class="chart-legend heat">&nbsp;</span></i>
+        <span translate>Fjärrvärme</span>
+        <i
+          class="icon ion-checkmark-round icon-accessory"
+          ng-show="ctrl.config.meters.heat.selected"></i>
+      </ion-item>
+      <ion-item
+        ng-if="ctrl.config.meters.production"
+        class="item-icon-left item-icon-right"
+        ng-click="ctrl.config.toggleSelected('production')">
+        <i class="icon"><span class="chart-legend production">&nbsp;</span></i>
+        <span translate>Produktion</span>
+        <i
+          class="icon ion-checkmark-round icon-accessory"
+          ng-show="ctrl.config.meters.production.selected"></i>
+      </ion-item>
+
+      <div class="item item-divider" translate>El</div>
+      <div class="card" ng-if="!ctrl.loading.electricity && ctrl.meters.electricity">
+        <div class="item item-icon-left">
+          <i class="icon ion-flash"></i>
+          <h2>{{ ctrl.meters.electricity.name || ctrl.meters.electricity.address || ctrl.electricity.meters.ean }}</h2>
+          <p translate>{{ ctrl.meters.electricity.ean }}<br>Snittförbrukning: {{ ctrl.meters.electricity.consumption_stats.energy.month | emAverageConsumption | number:0 }} kWh / månad</p>
+        </div>
+        <div class="item tabs tabs-secondary item-divider">
+          <a
+            class="tab-item"
+            ui-sref="price-electricity({meterId: ctrl.meters.electricity._id})"
+            translate>
+            Ställ in priser
+          </a>
+          <a
+            class="tab-item"
+            ui-sref="settings-meter({type: 'electricity'})"
+            ng-if="ctrl.allMeters.electricity.length > 1"
+            translate>
+            Byt mätpunkt
+          </a>
+        </div>
+      </div>
+      <div class="card" ng-if="!ctrl.loading.electricity && !ctrl.meters.electricity">
+        <div class="item item-text-wrap">
+          <p class="text-center" translate>Du har inga elmätpunnkter.</p>
+        </div>
+      </div>
+
+      <div class="item item-divider" translate>Fjärrvärme</div>
+      <div class="card" ng-if="!ctrl.loading.heat && ctrl.meters.heat">
+        <div class="item item-icon-left">
+          <i class="icon ion-home"></i>
+          <h2>{{ ctrl.meters.heat.name || ctrl.meters.heat.address || ctrl.heat.meters.ean }}</h2>
+          <p>
+            {{ ctrl.meters.heat.ean }}<br>
+            <span translate>Snittförbrukning:</span> {{ ctrl.meters.heat.consumption_stats.energy.month | emAverageConsumption | number:0 }} <span translate>kWh / månad</span></p>
+        </div>
+        <div class="item tabs tabs-secondary item-divider">
+          <a
+            class="tab-item"
+            ui-sref="price-heat({meterId: ctrl.meters.heat._id})"
+            translate>
+            Ställ in priser
+          </a>
+          <a
+            class="tab-item"
+            ui-sref="settings-meter({type: 'heat'})"
+            ng-if="ctrl.allMeters.heat.length > 1"
+            translate>
+            Byt mätpunkt
+          </a>
+        </div>
+      </div>
+      <div class="card" ng-if="!ctrl.loading.heat && !ctrl.meters.heat">
+        <div class="item item-text-wrap">
+          <p class="normal" translate>Du har inga fjärrvärmemätpunkter.</p>
+        </div>
+      </div>
+
+      <div class="item item-divider" translate>Produktion</div>
+      <div class="card" ng-if="!ctrl.loading.production && ctrl.meters.production">
+        <div class="item item-icon-left">
+          <i class="icon ion-flash"></i>
+          <h2>{{ ctrl.meters.production.name || ctrl.meters.production.address || ctrl.production.meters.ean }}</h2>
+          <p>
+            {{ ctrl.meters.production.ean }}<br>
+            <span translate>Snittproduktion:</span> {{ ctrl.meters.production.consumption_stats.energy.month | emAverageConsumption | number:0 }} <span translate>kWh / månad</span></p>
+        </div>
+        <div class="item tabs tabs-secondary item-divider">
+          <a
+            class="tab-item"
+            ui-sref="settings-meter({type: 'production'})"
+            translate>
+            Byt mätpunkt
+          </a>
+        </div>
+      </div>
+      <div class="card" ng-if="!ctrl.loading.production && !ctrl.meters.production">
+        <div class="item item-text-wrap">
+          <p class="normal" translate>Om du är mikroproducent kan du visa din produktion i appen genom att välja din mätpunkt här.</p>
+        </div>
+        <div class="item tabs tabs-secondary item-divider">
+          <a
+            class="tab-item"
+            ui-sref="settings-meter({type: 'production'})"
+            translate>
+            Välj mätpunkt
+          </a>
+        </div>
+      </div>
+
+      <div class="item item-divider" ng-if="ctrl.isFirst"></div>
+      <div class="padding" ng-if="ctrl.isFirst">
+        <button
+           class="button button-positive button-block"
+           ng-click="ctrl.showConsumption()" translate>
+          Visa användning
+        </button>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

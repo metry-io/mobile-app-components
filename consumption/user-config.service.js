@@ -40,7 +40,7 @@ module.exports = /*@ngInject*/ function(
 
     this._bounds = undefined;
     _saveMeters(this.me, this.meters);
-    $rootScope.$broadcast('em:metersChanged', this.meters);
+    $rootScope.$broadcast('mry:metersChanged', this.meters);
   };
 
   this.setSetting = function setSetting(key, value) {
@@ -61,6 +61,14 @@ module.exports = /*@ngInject*/ function(
         callback(fullMeter, type);
       }
     });
+  };
+
+  this.toggleSelected = function toggleSelected(type) {
+    this.setSelected(type, !this.isSelected(type));
+  };
+
+  this.isSelected = function isSelected(type) {
+    return (this.meters[type] && this.meters[type].selected);
   };
 
   this.setSelected = function setSelected(type, selected) {
@@ -92,7 +100,7 @@ module.exports = /*@ngInject*/ function(
 
     this._bounds = undefined;
     _saveMeters(this.me, this.meters);
-    $rootScope.$broadcast('em:selectedMetersChanged', this.meters);
+    $rootScope.$broadcast('mry:selectedMetersChanged', this.meters);
   };
 
   // Returns the summarized boundaries for all selected meters

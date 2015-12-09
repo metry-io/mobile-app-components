@@ -1,0 +1,35 @@
+<ion-view view-title="{{ 'Elnät' | translate }}">
+  <ion-content overflow-scroll="true" class="mry-settings mry-settings-price-electricity-grid">
+    <ion-list>
+      <div class="padding">
+        <p translate>Priset för elnät anges för en viss period, t.ex. ett år.</p>
+      </div>
+
+      <div class="item item-divider" translate>Elnätspriser</div>
+
+      <div ng-if="ctrl.loading" class="padding text-center">
+        <ion-spinner></ion-spinner>
+      </div>
+
+      <div ng-if="!ctrl.loading">
+        <ion-item
+          ng-repeat="period in ctrl.periods"
+          class="item-icon-right"
+          ui-sref="price-electricity-grid-edit({meterId: ctrl.meterId, calcMetricId: period._id})">
+          {{ ::period.name }}
+          <span class="item-note">{{ ::period.period }}</span>
+          <i class="icon icon-accessory ion-chevron-right"></i>
+        </ion-item>
+
+        <p ng-if="ctrl.periods.length === 0" class="padding text-center" translate>
+          Det finns inga prisinställningar för denna anläggning.
+        </p>
+
+        <div class="padding text-center">
+          <a
+            class="button button-positive button-block"
+            ui-sref="price-electricity-grid-edit({meterId: ctrl.meterId})" translate>Lägg till ny period</a>
+        </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

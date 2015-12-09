@@ -1,0 +1,37 @@
+<ion-view view-title="{{ 'Elhandlare' | translate }}">
+  <ion-content overflow-scroll="true" class="mry-settings mry-settings-price-electricity-retail">
+    <ion-list>
+      <div class="padding">
+        <p translate>Här kan du lägga in den årsavgift och det elpris som du betalar till din elhandlare. Om du byter elhandlare eller elhandelsavtal kan du lägga in flera olika perioder med olika priser.</p>
+        <p ng-if="ctrl.periods.length > 0" translate>Innan du kan lägga till ett nytt avtal måste du avsluta det pågående genom att välja ett slutdatum för det.</p>
+      </div>
+
+      <div class="item item-divider" translate>Avtalsperioder</div>
+
+      <div ng-if="ctrl.loading" class="padding text-center">
+        <ion-spinner></ion-spinner>
+      </div>
+
+      <div ng-if="!ctrl.loading">
+        <ion-item
+          ng-repeat="period in ctrl.periods"
+          class="item-icon-right"
+          ui-sref="price-electricity-retail-edit({meterId: ctrl.meterId, calcMetricId: period._id})">
+          {{ ::period.name }}
+          <span class="item-note">{{ ::period.period }}</span>
+          <i class="icon icon-accessory ion-chevron-right"></i>
+        </ion-item>
+
+        <p ng-if="ctrl.periods.length === 0" class="padding text-center" translate>
+          Det finns inga avtal sparade för denna anläggning.
+        </p>
+
+        <div class="padding text-center">
+          <a
+            class="button button-positive button-block"
+            ui-sref="price-electricity-retail-edit({meterId: ctrl.meterId})">Lägg till nytt elavtal</a>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

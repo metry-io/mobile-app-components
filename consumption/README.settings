@@ -1,0 +1,93 @@
+/*
+ * To add consumption module, you need to define settings states that are
+ * shown in an appropriate view in your app. Examples are shown below for
+ * convenience.
+ */
+
+$stateProvider.state('settings', {
+  parent: 'main',
+  url: "/settings/:isFirst",
+  views: {
+    'targetView': {
+      template: require('./settings.tmpl.html'),
+      controller: 'SettingsController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('settings-meter', {
+  parent: 'main',
+  url: '/settings/meter/:type',
+  views: {
+    'targetView': {
+      template: require('./settings-meter.tmpl.html'),
+      controller: 'MetersController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('price-heat', {
+  url: "/price-heat/:meterId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-heat.tmpl.html'),
+      controller: 'SettingsPriceHeatController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('price-electricity', {
+  url: "/price-electricity/:meterId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-electricity.tmpl.html'),
+      controller: 'SettingsPriceElectricityController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('price-electricity-grid', {
+  url: "/price-electricity-grid/:meterId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-electricity-grid.tmpl.html'),
+      controller: 'SettingsPriceElectricityGridController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('price-electricity-grid-edit', {
+  url: "/price-electricity-grid-edit/:meterId/:calcMetricId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-electricity-grid-edit.tmpl.html'),
+      controller: 'SettingsPriceElectricityGridEditController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('price-electricity-retail', {
+  url: "/price-electricity-retail/:meterId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-electricity-retail.tmpl.html'),
+      controller: 'SettingsPriceElectricityRetailController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('price-electricity-retail-edit', {
+  url: "/price-electricity-retail-edit/:meterId/:calcMetricId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-electricity-retail-edit.tmpl.html'),
+      controller: 'SettingsPriceElectricityRetailEditController as ctrl'
+    }
+  }
+});

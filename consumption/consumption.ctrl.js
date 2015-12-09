@@ -1,10 +1,13 @@
+var fs = require('fs');
+
 var DEFAULT_VIEW = 'month';
 var DETAIL_GRANULARITIES = require('./detail-granularities.json');
 
 module.exports = /*@ngInject*/ function(
   $scope,
+  $state,
   $rootScope,
-  $ionicSideMenuDelegate,
+  $ionicModal,
   $ionicScrollDelegate,
   DateSelectPopup,
   ConsumptionSlides,
@@ -27,8 +30,8 @@ module.exports = /*@ngInject*/ function(
   this.hasData = undefined;
 
   $scope.$on('$ionicView.afterEnter', function() {
-    unregisterMeters = unregisterMeters || $rootScope.$on('em:selectedMetersChanged', clearAndReloadData);
-    unregisterAppResume = unregisterAppResume || $rootScope.$on('em:appResume', clearAndReloadData);
+    unregisterMeters = unregisterMeters || $rootScope.$on('mry:selectedMetersChanged', clearAndReloadData);
+    unregisterAppResume = unregisterAppResume || $rootScope.$on('mry:appResume', clearAndReloadData);
 
     clearAndReloadData();
   });
@@ -71,10 +74,6 @@ module.exports = /*@ngInject*/ function(
   this.setView = function setView(view) {
     _this.view = view;
     reloadData();
-  };
-
-  this.showViewToggles = function showViewToggles() {
-    $ionicSideMenuDelegate.toggleRight();
   };
 
   // Dynabox functions

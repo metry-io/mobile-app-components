@@ -1,0 +1,27 @@
+<ion-view view-title="{{ 'Välj anläggning' | translate }}" cache-view="false">
+  <ion-content class="mry-settings mry-settings-meter">
+    <ion-refresher on-refresh="ctrl.refresh()"></ion-refresher>
+    <ion-list>
+      <ion-item
+        ng-if="ctrl.allowSelectNone"
+        class="item-icon-right"
+        href=""
+        ng-click="ctrl.selectMeter(null)">
+        <span translate>Ingen</span>
+        <i
+          ng-show="ctrl.meter === null"
+          class="icon icon-accessory ion-checkmark-round"></i>
+      </ion-item>
+      <ion-item
+        class="item-icon-right"
+        ng-repeat="meter in ctrl.meters"
+        href=""
+        ng-click="ctrl.selectMeter(meter)">
+        {{ meter.name || meter.address || meter.ean }}
+        <i
+          ng-show="meter._id === ctrl.meter._id"
+          class="icon icon-accessory ion-checkmark-round"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

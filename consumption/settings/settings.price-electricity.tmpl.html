@@ -1,0 +1,22 @@
+<ion-view view-title="{{ 'Priser' | translate }}">
+  <ion-content overflow-scroll="true" class="mry-settings mry-settings-price-electricity">
+    <ion-list>
+      <p class="padding">För din elanläggning kan du ställa in både den avgift du betalar för elnätet och den avgift du betalar till din elhandlare för elanvändningen.</p>
+      <div class="item item-divider" translate>Elnät</div>
+      <ion-item
+        class="item-icon-right"
+        ui-sref="price-electricity-grid({meterId: ctrl.meterId})">
+        <span translate>Ställ in nätavgifter</span>
+        <i class="icon icon-accessory ion-chevron-right"></i>
+      </ion-item>
+
+      <div class="item item-divider" translate>Elhandlare</div>
+      <ion-item
+        class="item-icon-right"
+        ui-sref="price-electricity-retail({meterId: ctrl.meterId})">
+        <span translate>Ställ in elhandelspriser</span>
+        <i class="icon icon-accessory ion-chevron-right"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
