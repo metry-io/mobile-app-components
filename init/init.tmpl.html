@@ -1,0 +1,14 @@
+<ion-view title="">
+  <ion-content scroll="false" class="mry-init row row-bottom">
+    <div class="col text-center" ng-show="!ctrl.loggedIn">
+      <p><button class="button button-light" ng-click="ctrl.login()" style="width: 90%">Logga in</button></p>
+      <div class="row">
+        <div class="col-50">
+          <a href="" ng-click="ctrl.createAccount()" translate>Skapa nytt konto</a>
+        </div>
+        <div class="col-50">
+          <a href="" ng-click="ctrl.forgotPassword()" translate>Glömt lösenord</a>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>
