@@ -1,0 +1,48 @@
+<ion-view view-title="{{ 'Nordpool spotpriser' | translate }}">
+  <div class="tabs tabs-striped tabs-positive tabs-top">
+    <a
+      href=""
+      ng-click="ctrl.view = -1"
+      class="tab-item"
+      ng-class="{'tab-item-active': ctrl.view === -1}" translate>Igår</a>
+    <a
+      href=""
+      ng-click="ctrl.view = 0"
+      class="tab-item"
+      ng-class="{'tab-item-active': ctrl.view === 0}" translate>Idag</a>
+    <a
+      href=""
+      ng-click="ctrl.view = 1"
+      class="tab-item"
+      ng-class="{'tab-item-active': ctrl.view === 1}" translate>Imorgon</a>
+  </div>
+
+  <ion-content
+    class="mry-nordpool has-subheader mry-no-tomorrow-prices row row-center"
+    scroll="false"
+    ng-show="ctrl.loading">
+    <ion-spinner class="col col-center text-center"></ion-spinner>
+  </ion-content>
+  <ion-content class="mry-nordpool has-subheader" scroll="true">
+    <ion-list
+      ng-show="!ctrl.loading && (ctrl.view < 1 || ctrl.hasTomorrowsPrices)">
+      <ion-item
+        class="mry-nordpool-item"
+        ng-repeat="price in ctrl.prices | limitTo:24:(ctrl.view + 1) * 24 track by $index">
+        <div class="price-period">{{ ctrl.getHour($index) }}</div>
+        <div class="price-bar-container">
+          <div class="price-bar" ng-style="{width: ((price / ctrl.max) * 100) + '%'}"></div>
+        </div>
+        <div class="price">{{ price  * 100 | number:0 }} öre</div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-content
+    class="mry-nordpool has-subheader mry-no-tomorrow-prices row row-center"
+    scroll="false"
+    ng-show="!ctrl.loading && ctrl.view === 1 && !ctrl.hasTomorrowsPrices">
+    <div class="col col-center text-center">
+      Morgondagens elpriser är ännu inte satta.
+    </div>
+  </ion-content>
+</ion-view>

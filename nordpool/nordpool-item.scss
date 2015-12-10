@@ -1,0 +1,39 @@
+.has-header.mry-nordpool {
+  top: 92px;
+}
+
+.item.mry-nordpool-item {
+  height: 30px;
+  line-height: 30px;
+
+  .price-period {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    width: 60px;
+  }
+
+  .price-bar-container {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 65px;
+    right: 65px;
+
+    > .price-bar {
+      background-color: $royal;
+      position: relative;
+      height: 100%;
+    }
+  }
+
+  .price {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    width: 60px;
+    text-align: right;
+  }
+}
