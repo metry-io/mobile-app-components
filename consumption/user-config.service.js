@@ -14,6 +14,7 @@ module.exports = /*@ngInject*/ function(
     this.allMeters = undefined;
     this._bounds = undefined;
     this.settings = undefined;
+    this.isSetup = false;
   };
 
   this.reset();
@@ -201,6 +202,7 @@ module.exports = /*@ngInject*/ function(
         }
       });
 
+      _this.isSetup = true;
       return success;
     });
   };
