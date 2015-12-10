@@ -1,6 +1,6 @@
 /*
  * Nordpool spot prices component
- * 
+ *
  * Configure the nordpool bidding area in the appConfig constant.
  * The bidding areas are SE1, SE2, SE3, SE4.
  * Area map can be found on:
@@ -9,7 +9,9 @@
  * Config examle
  * angular.constant('appModule', {
  *   // ...other config here...
- *   nordpoolArea: 'SE1'
+ *   nordpool: {
+ *     area: 'SE1'
+ *   }
  * });
  */
 

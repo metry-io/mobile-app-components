@@ -21,7 +21,7 @@ module.exports = /*@ngInject*/ function(
  };
 
  function getPrices() {
-   var area = appConfig.nordpoolArea;
+   var area = appConfig.nordpool.area;
 
    if (!area) {
      return console.error('No bidding area specified in app config');
