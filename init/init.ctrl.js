@@ -40,7 +40,8 @@ module.exports = /*@ngInject*/ function(
     $timeout(updateState, 50);
 
     $ionicHistory.nextViewOptions({
-      historyRoot: true
+      historyRoot: true,
+      disableAnimate: true
     });
   });
 
