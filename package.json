@@ -1,6 +1,6 @@
 {
   "name": "metry-mobile-app-components",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Ionic components that make up the Metry mobile apps",
   "main": "index.js",
   "scripts": {
