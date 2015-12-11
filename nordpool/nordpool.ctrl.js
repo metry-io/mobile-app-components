@@ -1,8 +1,8 @@
 var ArrayUtil = require('../shared/array-util.js');
 
 module.exports = /*@ngInject*/ function(
-  $rootScope,
   $scope,
+  $ionicPlatform,
   energimolnetAPI,
   appConfig
 ) {
@@ -50,11 +50,15 @@ module.exports = /*@ngInject*/ function(
 
  $scope.$on('$ionicView.beforeEnter', function() {
    getPrices();
-   unregisterAppResume = $rootScope.$on('mry:appResume', getPrices);
+   unregisterAppResume = unregisterAppResume || $ionicPlatform.on(
+     'resume',
+    function() {
+      getPrices();
+    });
  });
 
  $scope.$on('$ionicView.afterLeave', function() {
-   if (typeof unregisterAppResume === 'function') {
+   if (unregisterAppResume) {
      unregisterAppResume();
      unregisterAppResume = undefined;
    }

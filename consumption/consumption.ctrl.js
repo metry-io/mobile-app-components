@@ -9,6 +9,7 @@ module.exports = /*@ngInject*/ function(
   $rootScope,
   $ionicModal,
   $ionicScrollDelegate,
+  $ionicPlatform,
   DateSelectPopup,
   ConsumptionSlides,
   UserConfig
@@ -31,7 +32,10 @@ module.exports = /*@ngInject*/ function(
 
   $scope.$on('$ionicView.afterEnter', function() {
     unregisterMeters = unregisterMeters || $rootScope.$on('mry:selectedMetersChanged', clearAndReloadData);
-    unregisterAppResume = unregisterAppResume || $rootScope.$on('mry:appResume', clearAndReloadData);
+
+    unregisterAppResume = unregisterAppResume || $ionicPlatform.on('resume', function() {
+      clearAndReloadData();
+    });
 
     clearAndReloadData();
   });
