@@ -6,6 +6,7 @@
 // angular.constant('appModule', {
 //   version: 1.0,
 //   contact: {
+//     imageName: 'contact_us.jpg', // remove if you don't want a header image
 //     phone: "+012345678",
 //     phoneDisplay: "+012&nbsp;345&nbsp;67-8",
 //     mail: "my@mail.com",

@@ -1,6 +1,6 @@
 <ion-view view-title="{{'Kontakta oss' | translate }}">
   <ion-content overflow-scroll="true">
-    <img src="img/contact-us.jpg" width="100%" height="auto">
+    <img ng-src="img/{{ ctrl.imageName }}" ng-if="ctrl.imageName" width="100%" height="auto">
     <div class="list">
       <div class="item item-divider" ng-if="ctrl.config.phone" translate>Telefon</div>
       <ion-item
