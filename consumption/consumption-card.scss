@@ -1,5 +1,5 @@
-$mry-consumption-card-color-bg: $stable;
-$mry-consumption-card-color: $dark;
+$mry-consumption-card-color-bg: $stable !default;
+$mry-consumption-card-color: $dark !default;
 
 .card.mry-consumption-card {
   margin: 5px;

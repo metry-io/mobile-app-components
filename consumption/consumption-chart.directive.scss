@@ -1,11 +1,11 @@
 // Chart colors
-$mry-bar-fill-electricity: $positive;
-$mry-bar-fill-heat: $assertive;
-$mry-bar-fill-production: $royal;
-$mry-grid-stroke: lightgrey;
-$mry-label-x-color: black;
-$mry-label-y-color-bg: $dark;
-$mry-label-y-color: $stable;
+$mry-bar-fill-electricity: $positive !default;
+$mry-bar-fill-heat: $assertive !default;
+$mry-bar-fill-production: $royal !default;
+$mry-grid-stroke: lightgrey !default;
+$mry-label-x-color: black !default;
+$mry-label-y-color-bg: $dark !default;
+$mry-label-y-color: $stable !default;
 
 // Dimensions
 $chart-height: 200px;
