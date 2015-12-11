@@ -4,22 +4,23 @@
 
 .item.mry-nordpool-item {
   height: 30px;
-  line-height: 30px;
+  line-height: 32px;
+  font-size: 15px;
 
   .price-period {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 10px;
-    width: 60px;
+    left: 15px;
+    width: 50px;
   }
 
   .price-bar-container {
     position: absolute;
-    top: 2px;
-    bottom: 2px;
-    left: 65px;
-    right: 65px;
+    top: 5px;
+    bottom: 5px;
+    left: 70px;
+    right: 70px;
 
     > .price-bar {
       background-color: $royal;
@@ -32,8 +33,8 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 10px;
-    width: 60px;
+    right: 15px;
+    width: 50px;
     text-align: right;
   }
 }
