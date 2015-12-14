@@ -6,7 +6,7 @@
       <ion-item
         class="item-icon-right"
         ng-if="ctrl.config.phone"
-        ng-href="tel://{ctrl.config.phone }">
+        ng-href="tel://{{ ctrl.config.phone }}">
         <span ng-bind-html="ctrl.config.phoneDisplay | mryTrust"></span>
         <i class="icon ion-ios-telephone-outline"></i>
       </ion-item>
