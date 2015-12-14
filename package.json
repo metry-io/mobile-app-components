@@ -32,7 +32,14 @@
   },
   "browserify": {
     "transform": [
-      "brfs"
+      "brfs",
+      "browserify-ngannotate",
+      "uglifyify"
     ]
+  },
+  "devDependencies": {
+    "brfs": "^1.4.1",
+    "browserify-ngannotate": "^2.0.0",
+    "uglifyify": "^3.0.1"
   }
 }
