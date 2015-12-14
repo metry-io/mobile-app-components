@@ -19,6 +19,7 @@
  * angular.constant('appModule', {
  *   // ...other config here...
  *   init: {
+ *     registrationId: '<id of branded registration user, if applicable>',
  *     initialState: 'consumptions',
  *     setupFailedState: 'settings'
  *   }

@@ -27,7 +27,18 @@ module.exports = /*@ngInject*/ function(
 
   this.createAccount = function createAccount() {
     var authUrl = emAuth.authorizeUrl();
-    var url = 'https://app.metry.io/register?redirect=' + encodeURIComponent(authUrl);
+    var url;
+
+   if (appConfig.init && appConfig.init.registrationId) {
+     url = 'https://app.metry.io/register/#/' +
+           appConfig.init.registrationId +
+           '?redirect=';
+   } else {
+     url = 'https://app.metry.io/register?redirect=';
+   }
+
+   url += encodeURIComponent(authUrl);
+
     $window.open(url, '_blank');
   };
 
