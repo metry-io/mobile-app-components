@@ -43,7 +43,7 @@ module.exports = /*@ngInject*/ function(
   };
 
   this.forgotPassword = function forgotPassword() {
-    var url = 'https://app.metry.io/security#/forgot-password';
+    var url = 'https://app.metry.io/security?force=1#/forgot-password';
     $window.open(url, '_blank');
   };
 
