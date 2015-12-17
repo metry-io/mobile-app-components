@@ -1,11 +1,10 @@
 <ion-view view-title="{{ 'Elhandlare' | translate }}">
   <ion-content overflow-scroll="true" class="mry-settings mry-settings-price-electricity-retail">
+    <div class="padding">
+      <p translate>Här kan du lägga in den årsavgift och det elpris som du betalar till din elhandlare. Om du byter elhandlare eller elhandelsavtal kan du lägga in flera olika perioder med olika priser.</p>
+      <p ng-if="ctrl.periods.length > 0" translate>Innan du kan lägga till ett nytt avtal måste du avsluta det pågående genom att välja ett slutdatum för det.</p>
+    </div>
     <ion-list>
-      <div class="padding">
-        <p translate>Här kan du lägga in den årsavgift och det elpris som du betalar till din elhandlare. Om du byter elhandlare eller elhandelsavtal kan du lägga in flera olika perioder med olika priser.</p>
-        <p ng-if="ctrl.periods.length > 0" translate>Innan du kan lägga till ett nytt avtal måste du avsluta det pågående genom att välja ett slutdatum för det.</p>
-      </div>
-
       <div class="item item-divider" translate>Avtalsperioder</div>
 
       <div ng-if="ctrl.loading" class="padding text-center">
