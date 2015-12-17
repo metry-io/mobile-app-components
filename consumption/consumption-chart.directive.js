@@ -210,7 +210,7 @@ module.exports = /*@ngInject*/ function() {
 function adjustedMaxMin(max, min) {
   var roundMax = Math.ceil(max);
   var roundMin = Math.floor(min);
-  var divisor = (min < 0) ? 4 : 20;
+  var divisor = 4;
   var diff = roundMax - roundMin;
 
   if (diff % divisor === 0) return [roundMax, roundMin];
