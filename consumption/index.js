@@ -3,6 +3,21 @@
  * To use this module, your apps need to define states for all settings
  * controllers. See README.settings for more info.
  *
+ * To configure what grid owner to use when selecting metric models, you
+ * use an angular constant named appConfig (same as all other modules).
+ *
+ * angular.constant('appModule', {
+ *   consumption: {
+ *     electricity {
+ *       gridModelOwner: '<id or null>',
+ *       retailModelOwner: '<id or null>'
+ *     },
+ *     heat: {
+ *      gridModelOwner: '<id or null>'
+ *     }
+ *   }
+ * });
+ *
  */
 
 var MODULE_NAME = 'consumption';

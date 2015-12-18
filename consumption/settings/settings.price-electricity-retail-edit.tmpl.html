@@ -4,7 +4,8 @@
       <ion-spinner></ion-spinner>
     </div>
     <p ng-if="!ctrl.loading" class="padding" translate>Elhandelspriset består av en årsavgift och ett elpris. Dessa prisuppgifter får du från din elhandlare.</p>
-    <ion-list ng-if="!ctrl.loading">
+    <p class="padding" ng-if="!ctrl.loading && !ctrl.metric.metric_model" translate>Det går för nävarande inte att lägga till elhandelspriser för denna mätpunkt.</p>
+    <ion-list ng-if="!ctrl.loading && ctrl.metric.metric_model">
       <div class="item item-divider" translate>Årsavgift (kr / år)</div>
       <div class="item item-input padding-bottom">
          <input

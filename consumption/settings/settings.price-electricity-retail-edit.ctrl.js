@@ -7,7 +7,8 @@ module.exports = /*@ngInject*/ function(
   emCalculatedMetrics,
   emDateUtil,
   PriceEditErrorHandler,
-  UserConfig
+  UserConfig,
+  appConfig
 ) {
   var _this = this;
   this.loading = true;
@@ -51,17 +52,25 @@ module.exports = /*@ngInject*/ function(
         _this.loading = false;
       });
     } else {
+      var holder = (appConfig && appConfig.consumption &&
+                    appConfig.consumption.electricity &&
+                    appConfig.consumption.electricity.retailModelOwner) ?
+                      appConfig.consumption.electricity.retailModelOwner : 'null';
+
       _this.metric = {
         metric_model: null,
       };
 
       emMetricModels.query({
-        holder: '512dfd2303e6ec0700000001',
+        holder: holder,
         applicable_types: 'electricity',
         group: 'cost',
         key: 'retail'
       }).then(function(res) {
-        _this.metric.metric_model = res.data[0]._id;
+        if (res && res.data && res.data[0]) {
+          _this.metric.metric_model = res.data[0]._id;
+        }
+      }).finally(function() {
         _this.loading = false;
       });
     }

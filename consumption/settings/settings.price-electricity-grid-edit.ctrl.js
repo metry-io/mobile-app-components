@@ -4,11 +4,11 @@ module.exports = /*@ngInject*/ function(
   $ionicLoading,
   $ionicHistory,
   emMetricModels,
-  emMeters,
   emCalculatedMetrics,
   emDateUtil,
   PriceEditErrorHandler,
-  UserConfig
+  UserConfig,
+  appConfig
 ) {
   var _this = this;
   this.loading = true;
@@ -56,13 +56,16 @@ module.exports = /*@ngInject*/ function(
   });
 
   function fetchModels() {
-    emMeters.get(_this.meterId).then(function(meter) {
-      return emMetricModels.query({
-        holder: meter.root.holder._id,
-        applicable_types: 'electricity',
-        group: 'cost',
-        key: 'grid'
-      });
+    var holder = (appConfig && appConfig.consumption &&
+                  appConfig.consumption.electricity &&
+                  appConfig.consumption.electricity.gridModelOwner) ?
+                    appConfig.consumption.electricity.gridModelOwner : 'null';
+
+    return emMetricModels.query({
+      holder: holder,
+      applicable_types: 'electricity',
+      group: 'cost',
+      key: 'grid'
     }).then(function(res) {
       _this.models = res.data;
       _this.loading = false;

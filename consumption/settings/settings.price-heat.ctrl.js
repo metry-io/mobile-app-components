@@ -2,13 +2,18 @@ module.exports = /*@ngInject*/ function(
   $scope,
   $ionicLoading,
   $stateParams,
-  emMeters,
   emMetricModels,
   emCalculatedMetrics,
-  UserConfig
+  UserConfig,
+  appConfig
 ) {
   var _this = this;
   var calcMetrics = emCalculatedMetrics.forMeter($stateParams.meterId);
+  var holder = (appConfig && appConfig.consumption &&
+                appConfig.consumption.electricity &&
+                appConfig.consumption.electricity.gridModelOwner) ?
+                  appConfig.consumption.electricity.gridModelOwner : 'null';
+
 
   this.loading = true;
 
@@ -22,13 +27,11 @@ module.exports = /*@ngInject*/ function(
 
       _this.modelId = metrics[0] ? metrics[0].metric_model : undefined;
 
-      emMeters.get(_this.meterId).then(function(meter) {
-        return emMetricModels.query({
-          holder: meter.root.holder._id,
-          applicable_types: 'heat',
-          group: 'cost',
-          key: 'grid'
-        });
+      return emMetricModels.query({
+        holder: holder,
+        applicable_types: 'heat',
+        group: 'cost',
+        key: 'grid'
       }).then(function(res) {
         _this.models = res.data;
       }).finally(function() {
