@@ -4,7 +4,7 @@
       <ion-spinner></ion-spinner>
     </div>
     <p ng-if="!ctrl.loading" class="padding" translate>Fjärrvärmekostnaden består av en årsavgift och ett energipris. Dessa prisuppgifter får du från ditt fjärrvärmebolag.</p>
-    <p class="padding" ng-if="!ctrl.loading && !ctrl.metric.metric_model" translate>Det går för nävarande inte att lägga till elhandelspriser för denna mätpunkt.</p>
+    <p class="padding" ng-if="!ctrl.loading && !ctrl.metric.metric_model" translate>Det går för nävarande inte att ändra fjärrvärmepriser för denna mätpunkt i appen.</p>
     <ion-list ng-if="!ctrl.loading && ctrl.metric.metric_model">
       <div class="item item-divider" translate>Årsavgift (kr / år)</div>
       <div class="item item-input padding-bottom">

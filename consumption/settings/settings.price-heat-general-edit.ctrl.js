@@ -30,24 +30,26 @@ module.exports = /*@ngInject*/ function(
 
     if (_this.calcMetricId) {
       calcMetrics.get(_this.calcMetricId).then(function(calcMetric) {
-        _this.metric = calcMetric;
+        if (calcMetric && calcMetric.params) {
+          _this.metric = calcMetric;
 
-        var components = _this.metric.period.split('-');
+          var components = _this.metric.period.split('-');
 
-        if (components[0]) {
-          _this.fromDate = emDateUtil.getDate(components[0]);
-        }
-
-        if (components[1]) {
-          _this.toDate = emDateUtil.getDate(components[1]);
-
-          if (_this.toDate) {
-            _this.toDateType = 1;
+          if (components[0]) {
+            _this.fromDate = emDateUtil.getDate(components[0]);
           }
-        }
 
-        _this.annualFee = calcMetric.params.annual_fee;
-        _this.heatPrice = calcMetric.params.heat_price * 100;
+          if (components[1]) {
+            _this.toDate = emDateUtil.getDate(components[1]);
+
+            if (_this.toDate) {
+              _this.toDateType = 1;
+            }
+          }
+
+          _this.annualFee = calcMetric.params.annual_fee;
+          _this.heatPrice = calcMetric.params.heat_price * 100;
+        }
 
         _this.loading = false;
       });
