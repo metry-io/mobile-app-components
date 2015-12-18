@@ -2,6 +2,16 @@
  * To add consumption module, you need to define settings states that are
  * shown in an appropriate view in your app. Examples are shown below for
  * convenience.
+ *
+ * Settings for electricity grid and heat are avalable in two versions.
+ * One that expects the utility provider to have predefined metric models that
+ * the user choses from, and another that should be used in combination with a
+ * null metricOwner, which uses the default Metry price models where the user
+ * can enter an annual fee and a transfer/energy fee.
+ *
+ * For heat meters, you typically don't need to show the period configuration
+ * if the utility provider has specified a price model, since price changes in
+ * time are reflected in the metric model.
  */
 
 $stateProvider.state('settings', {
@@ -37,6 +47,30 @@ $stateProvider.state('price-heat', {
   }
 });
 
+// Alternative version, when showing heat price periods
+$stateProvider.state('price-heat', {
+  url: "/price-heat/:meterId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-heat-periods.tmpl.html'),
+      controller: 'SettingsPriceHeatPeriodsController as ctrl'
+    }
+  }
+});
+
+// When using heat price periods, also include this state
+$stateProvider.state('price-heat-general-edit', {
+  url: "/price-heat-general-edit/:meterId/:calcMetricId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-heat-general-edit.tmpl.html'),
+      controller: 'SettingsPriceHeatGeneralEditController as ctrl'
+    }
+  }
+});
+
 $stateProvider.state('price-electricity', {
   url: "/price-electricity/:meterId",
   parent: "main",
@@ -66,6 +100,17 @@ $stateProvider.state('price-electricity-grid-edit', {
     'targetView': {
       template: require('./settings.price-electricity-grid-edit.tmpl.html'),
       controller: 'SettingsPriceElectricityGridEditController as ctrl'
+    }
+  }
+});
+
+$stateProvider.state('price-electricity-grid-general-edit', {
+  url: "/price-electricity-grid-edit/:meterId/:calcMetricId",
+  parent: "main",
+  views: {
+    'targetView': {
+      template: require('./settings.price-electricity-grid-general-edit.tmpl.html'),
+      controller: 'SettingsPriceElectricityGridGeneralEditController as ctrl'
     }
   }
 });

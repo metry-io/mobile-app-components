@@ -8,8 +8,11 @@ angular.module(MODULE_NAME, [])
 .controller('SettingsController', require('./settings.ctrl.js'))
 .controller('MetersController', require('./settings-meter.ctrl.js'))
 .controller('SettingsPriceHeatController', require('./settings.price-heat.ctrl.js'))
+.controller('SettingsPriceHeatPeriodsController', require('./settings.price-heat-periods.ctrl.js'))
+.controller('SettingsPriceHeatGeneralEditController', require('./settings.price-heat-general-edit.ctrl.js'))
 .controller('SettingsPriceElectricityController', require('./settings.price-electricity.ctrl.js'))
 .controller('SettingsPriceElectricityRetailController', require('./settings.price-electricity-retail.ctrl.js'))
 .controller('SettingsPriceElectricityRetailEditController', require('./settings.price-electricity-retail-edit.ctrl.js'))
 .controller('SettingsPriceElectricityGridController', require('./settings.price-electricity-grid.ctrl.js'))
-.controller('SettingsPriceElectricityGridEditController', require('./settings.price-electricity-grid-edit.ctrl.js'));
+.controller('SettingsPriceElectricityGridEditController', require('./settings.price-electricity-grid-edit.ctrl.js'))
+.controller('SettingsPriceElectricityGridGeneralEditController', require('./settings.price-electricity-grid-general-edit.ctrl.js'));

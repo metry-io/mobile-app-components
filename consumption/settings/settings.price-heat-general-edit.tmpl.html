@@ -1,0 +1,63 @@
+<ion-view view-title="{{ 'Redigera avtal' | translate }}">
+  <ion-content overflow-scroll="true" class="mry-settings mry-settings-price-retail-edit">
+    <div ng-if="ctrl.loading" class="padding text-center">
+      <ion-spinner></ion-spinner>
+    </div>
+    <p ng-if="!ctrl.loading" class="padding" translate>Fjärrvärmekostnaden består av en årsavgift och ett energipris. Dessa prisuppgifter får du från ditt fjärrvärmebolag.</p>
+    <p class="padding" ng-if="!ctrl.loading && !ctrl.metric.metric_model" translate>Det går för nävarande inte att lägga till elhandelspriser för denna mätpunkt.</p>
+    <ion-list ng-if="!ctrl.loading && ctrl.metric.metric_model">
+      <div class="item item-divider" translate>Årsavgift (kr / år)</div>
+      <div class="item item-input padding-bottom">
+         <input
+           type="number"
+           ng-keyup="ctrl.keyUp($event)"
+           ng-model="ctrl.annualFee" />
+      </div>
+      <div class="item item-divider" translate>Energipris (öre / kWh)</div>
+      <div class="item item-input padding-bottom">
+         <input
+           type="number"
+           ng-keyup="ctrl.keyUp($event)"
+           ng-model="ctrl.heatPrice" />
+      </div>
+
+      <div class="item item-divider" translate>Från</div>
+      <div class="item item-input padding-bottom">
+         <input
+           type="date"
+           ng-model="ctrl.fromDate" />
+      </div>
+
+      <div class="item item-divider" translate>Till</div>
+      <ion-item class="item-icon-right" href="" ng-click="ctrl.toDateType = 0">
+        <span translate>Tills vidare</span>
+        <i
+          class="icon icon-accessory ion-checkmark-round"
+          ng-if="ctrl.toDateType === 0"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" href="" ng-click="ctrl.toDateType = 1">
+        <span translate>Välj datum</span>
+        <i
+          class="icon icon-accessory ion-checkmark-round"
+          ng-if="ctrl.toDateType === 1"></i>
+      </ion-item>
+      <div
+        ng-if="ctrl.toDateType === 1"
+        class="item item-input padding-bottom">
+         <input
+           type="date"
+           ng-model="ctrl.toDate" />
+      </div>
+      <p class="padding text-center">
+        <button
+          class="button button-positive"
+          ng-disabled="!ctrl.metric.metric_model || !ctrl.fromDate || (ctrl.toDateType === 1 && !ctrl.toDate)"
+          ng-click="ctrl.save()" translate>Spara</button>
+        <button
+          ng-if="ctrl.metric._id"
+          class="button button-assertive"
+          ng-click="ctrl.deleteMetric()" translate>Radera</button>
+      </p>
+    </ion-list>
+  </ion-content>
+</ion-view>
