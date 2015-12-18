@@ -10,9 +10,9 @@ module.exports = /*@ngInject*/ function(
   var _this = this;
   var calcMetrics = emCalculatedMetrics.forMeter($stateParams.meterId);
   var holder = (appConfig && appConfig.consumption &&
-                appConfig.consumption.electricity &&
-                appConfig.consumption.electricity.gridModelOwner) ?
-                  appConfig.consumption.electricity.gridModelOwner : 'null';
+                appConfig.consumption.heat &&
+                appConfig.consumption.heat.gridModelOwner) ?
+                  appConfig.consumption.heat.gridModelOwner : 'null';
 
 
   this.loading = true;
