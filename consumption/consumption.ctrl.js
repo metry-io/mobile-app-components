@@ -1,6 +1,5 @@
 var fs = require('fs');
 
-var DEFAULT_VIEW = 'month';
 var DETAIL_GRANULARITIES = require('./detail-granularities.json');
 
 module.exports = /*@ngInject*/ function(
@@ -25,55 +24,10 @@ module.exports = /*@ngInject*/ function(
     year: 0
   };
 
-  this.view = DEFAULT_VIEW;
+  this.view = getInitalView();
   this.meters = undefined;
   this.settings = undefined;
   this.hasData = undefined;
-
-  $scope.$on('$ionicView.afterEnter', function() {
-    unregisterMeters = unregisterMeters || $rootScope.$on('mry:selectedMetersChanged', clearAndReloadData);
-
-    unregisterAppResume = unregisterAppResume || $ionicPlatform.on('resume', function() {
-      clearAndReloadData();
-    });
-
-    clearAndReloadData();
-  });
-
-  $scope.$on('$ionicView.afterLeave', function() {
-    if (unregisterAppResume) unregisterAppResume();
-    if (unregisterMeters) unregisterMeters();
-
-    unregisterAppResume = undefined;
-    unregisterMeters = undefined;
-  });
-
-  $scope.$on('dynabox.slidechanged', function(event, index, state) {
-    offsets[_this.view] = index;
-    $ionicScrollDelegate.scrollTop(false);
-  });
-
-  function clearAndReloadData() {
-    slidesCache = new ConsumptionSlides();
-    reloadData();
-  }
-
-  function reloadData() {
-    var offset = offsets[_this.view];
-
-    // If there is no data at the offset, reset to 0
-    if (offset !== 0 && slidesCache.getSlide(-offset, _this.view) === null) {
-      offset = offsets[_this.view] = 0;
-    }
-
-    _this.meters = UserConfig.meters;
-    _this.settings = UserConfig.settings;
-    _this.hasData = (slidesCache.getSlide(0, _this.view) !== null);
-
-    var electricityMeter = _this.meters.electricity;
-
-    $scope.$broadcast('dynabox.goto', offset);
-  }
 
   this.setView = function setView(view) {
     _this.view = view;
@@ -128,4 +82,60 @@ module.exports = /*@ngInject*/ function(
 
     return (prodMeter && prodMeter.selected && elMeter && elMeter.selected) ? -bounds.electricity.max : 0;
   };
+  $scope.$on('$ionicView.afterEnter', function() {
+    unregisterMeters = unregisterMeters || $rootScope.$on('mry:selectedMetersChanged', clearAndReloadData);
+
+    unregisterAppResume = unregisterAppResume || $ionicPlatform.on('resume', function() {
+      clearAndReloadData();
+    });
+
+    clearAndReloadData();
+  });
+
+  $scope.$on('$ionicView.afterLeave', function() {
+    if (unregisterAppResume) unregisterAppResume();
+    if (unregisterMeters) unregisterMeters();
+
+    unregisterAppResume = undefined;
+    unregisterMeters = undefined;
+  });
+
+  $scope.$on('dynabox.slidechanged', function(event, index, state) {
+    offsets[_this.view] = index;
+    $ionicScrollDelegate.scrollTop(false);
+  });
+
+  function getInitalView() {
+    var view = 'month';
+
+    UserConfig.forEachSelectedMeter(function(m) {
+      if (!m.consumption_stats.energy.day.first) {
+        view = 'year';
+      }
+    });
+
+    return view;
+  }
+
+  function clearAndReloadData() {
+    slidesCache = new ConsumptionSlides();
+    reloadData();
+  }
+
+  function reloadData() {
+    var offset = offsets[_this.view];
+
+    // If there is no data at the offset, reset to 0
+    if (offset !== 0 && slidesCache.getSlide(-offset, _this.view) === null) {
+      offset = offsets[_this.view] = 0;
+    }
+
+    _this.meters = UserConfig.meters;
+    _this.settings = UserConfig.settings;
+    _this.hasData = (slidesCache.getSlide(0, _this.view) !== null);
+
+    var electricityMeter = _this.meters.electricity;
+
+    $scope.$broadcast('dynabox.goto', offset);
+  }
 };

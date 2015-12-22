@@ -27,13 +27,15 @@
   </div>
 
   <ion-content scroll="false" class="mry-consumption has-subheader">
-    <div ng-if="ctrl.hasData === false">
-      <h2 translate>Ingen data tillgänglig</h2>
-      <div ng-switch="ctrl.view">
-        <p ng-switch-when="day" translate>Det finns inga timvärden för de valda anläggningarna.</p>
-        <p ng-switch-when="week" translate>Det finns inga dygnsvärden för de valda anläggningarna.</p>
-        <p ng-switch-when="month" translate>Det finns inga dygnsvärden för de valda anläggningarna.</p>
-        <p ng-switch-when="year" translate>Det finns inga månadsvärden för de valda anläggningarna.</p>
+    <div ng-if="ctrl.hasData === false" class="row row-center pane">
+      <div class="col col-center text-center">
+        <h2 translate>Ingen data tillgänglig</h2>
+        <div ng-switch="ctrl.view">
+          <p ng-switch-when="day" translate>Det finns inga timvärden för de valda anläggningarna.</p>
+          <p ng-switch-when="week" translate>Det finns inga dygnsvärden för de valda anläggningarna.</p>
+          <p ng-switch-when="month" translate>Det finns inga dygnsvärden för de valda anläggningarna.</p>
+          <p ng-switch-when="year" translate>Det finns inga månadsvärden för de valda anläggningarna.</p>
+        </div>
       </div>
     </div>
 
