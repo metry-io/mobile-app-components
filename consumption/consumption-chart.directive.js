@@ -172,6 +172,7 @@ module.exports = /*@ngInject*/ function() {
         var range = (_this.max - _this.min);
         var yStep = size.height / count;
         var valueStep = range / count;
+        var numberFilter = $filter('number');
 
         var labelsEl = document.createElement('div');
         labelsEl.setAttribute('class', 'labelsY');
@@ -183,7 +184,7 @@ module.exports = /*@ngInject*/ function() {
           if (value < 0) value = -value;
 
           label.setAttribute('class', 'labelY');
-          label.innerText = value.toFixed(0) + ((i === 0) ? ' kWh' : '');
+          label.innerText = numberFilter(value, 0) + ((i === 0) ? ' kWh' : '');
           labelsEl.appendChild(label);
         }
 
