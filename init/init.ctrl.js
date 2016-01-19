@@ -15,11 +15,11 @@ module.exports = /*@ngInject*/ function(
   var showingBrowser = false;
   this.loggedIn = true;
 
-  this.login = function login() {
+  this.login = function login(url) {
     if (showingBrowser) return;
 
     showingBrowser = true;
-    mryLoginService.login().finally(function() {
+    mryLoginService.login(url).finally(function() {
       showingBrowser = false;
       $timeout(updateState, 10);
     });
@@ -38,8 +38,7 @@ module.exports = /*@ngInject*/ function(
    }
 
    url += encodeURIComponent(authUrl);
-
-    $window.open(url, '_blank');
+   _this.login(url);
   };
 
   this.forgotPassword = function forgotPassword() {

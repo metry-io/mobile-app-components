@@ -1,9 +1,12 @@
 var UrlUtil = require('./url-util.js');
 
 module.exports = /*@ngInject*/ function($q, emAuth, authConfig) {
-  function login() {
+  function login(url) {
     return $q(function(resolve, reject) {
-      var url = emAuth.authorizeUrl();
+      if (url === undefined) {
+        url = emAuth.authorizeUrl();
+      }
+
       var browser = window.open(url, '_blank', 'location=yes');
       var foundCode = false;
 
