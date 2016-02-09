@@ -92,6 +92,10 @@ module.exports = /*@ngInject*/ function(
           }
         }
 
+      }, function() {
+        mryLoginService.logout();
+        _this.loggedIn = false;
+      }).finally(function() {
         $ionicLoading.hide();
       });
     } else {
