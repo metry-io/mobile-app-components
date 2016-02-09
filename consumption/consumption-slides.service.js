@@ -121,6 +121,7 @@ module.exports = /*@ngInject*/ function(
       date.setMonth(date.getMonth() - offset);
     } else if (view === 'year') {
       date.setMonth(0);
+      date.setDate(1);
       date.setFullYear(date.getFullYear() - offset);
       compareDate.setDate(1);
       compareDate.setMonth(0);
