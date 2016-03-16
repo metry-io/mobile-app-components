@@ -160,7 +160,7 @@ module.exports = /*@ngInject*/ function(
     };
     var missingData = {};
     var missingDates = {};
-    var allDataMissing = true;
+    var allDataMissing = {};
 
     UserConfig.forEachSelectedMeter(function(meter, type) {
       missingData[type] = false;
@@ -227,7 +227,7 @@ module.exports = /*@ngInject*/ function(
             }
           });
 
-          allDataMissing = (nullRanges.length === 1 &&
+          allDataMissing[type] = (nullRanges.length === 1 &&
                             nullRanges[0][0] === 0 &&
                             nullRanges[0][1] === energy.length - 1);
         }
@@ -237,7 +237,7 @@ module.exports = /*@ngInject*/ function(
     return $q.all(promises).then(function() {
       slide.data = consumption;
       slide.sum = sum;
-      slide.allDataMissing = allDataMissing;
+      slide.allDataMissing = allValuesTrue(allDataMissing);
       slide.missing = missingData;
       slide.missingDates = missingDates;
 
@@ -245,3 +245,10 @@ module.exports = /*@ngInject*/ function(
     });
   }
 };
+
+function allValuesTrue(object) {
+  for (var key in object) {
+    if (object.hasOwnProperty(key) && object[key] !== true) { return false; }
+  }
+  return true;
+}
