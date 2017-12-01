@@ -148,7 +148,7 @@ module.exports = /*@ngInject*/ function(
     return bounds;
   };
 
-  this.autoSetup = function autoSetup() {
+  this.loadUserData = function () {
     var _this = this;
 
     return emMe.get().then(function(me) {

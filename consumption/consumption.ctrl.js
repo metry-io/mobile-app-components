@@ -5,6 +5,7 @@ var DETAIL_GRANULARITIES = require('./detail-granularities.json');
 module.exports = /*@ngInject*/ function(
   $scope,
   $state,
+  $timeout,
   $rootScope,
   $ionicModal,
   $ionicScrollDelegate,
@@ -82,6 +83,8 @@ module.exports = /*@ngInject*/ function(
 
     return (prodMeter && prodMeter.selected && elMeter && elMeter.selected) ? -bounds.electricity.max : 0;
   };
+
+  // Lifecycle events
   $scope.$on('$ionicView.afterEnter', function() {
     unregisterMeters = unregisterMeters || $rootScope.$on('mry:selectedMetersChanged', clearAndReloadData);
 
@@ -105,6 +108,7 @@ module.exports = /*@ngInject*/ function(
     $ionicScrollDelegate.scrollTop(false);
   });
 
+  // Helper functions
   function getInitalView() {
     var view = 'month';
 
@@ -118,8 +122,17 @@ module.exports = /*@ngInject*/ function(
   }
 
   function clearAndReloadData() {
-    slidesCache = new ConsumptionSlides();
-    reloadData();
+    UserConfig.loadUserData()
+      .then(function (success) {
+        if (success) {
+          slidesCache = new ConsumptionSlides();
+          reloadData();
+        } else {
+          $timeout(function () {
+            $state.go('init')
+          }, 200)
+        }
+      })
   }
 
   function reloadData() {

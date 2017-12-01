@@ -63,7 +63,7 @@ module.exports = /*@ngInject*/ function(
         hideOnStateChange: true
       });
 
-      UserConfig.autoSetup().then(function(isSetup) {
+      UserConfig.loadUserData().then(function(isSetup) {
         if (UserConfig.allMeters.electricity.length + UserConfig.allMeters.heat.length === 0) {
           // User has no meters.
           $ionicPopup.alert({
