@@ -25,6 +25,7 @@ module.exports = /*@ngInject*/ function(
     _this.toDate = undefined;
     _this.annualFee = 0;
     _this.transferFee = 0;
+    _this.energyTax = 0;
 
     calcMetrics = emCalculatedMetrics.forMeter(_this.meterId);
 
@@ -49,6 +50,7 @@ module.exports = /*@ngInject*/ function(
 
           _this.annualFee = calcMetric.params.annual_fee;
           _this.transferFee = calcMetric.params.transfer_fee * 100;
+          _this.energyTax = calcMetric.params.energy_tax * 100;
         }
 
         _this.loading = false;
@@ -89,7 +91,8 @@ module.exports = /*@ngInject*/ function(
       period: from + '-' + to,
       params: {
         annual_fee: _this.annualFee,
-        transfer_fee: _this.transferFee / 100
+        transfer_fee: _this.transferFee / 100,
+        energy_tax: _this.energyTax / 100
       }
     };
 

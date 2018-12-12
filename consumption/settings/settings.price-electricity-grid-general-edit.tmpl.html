@@ -21,6 +21,14 @@
            ng-model="ctrl.transferFee" />
       </div>
 
+      <div class="item item-divider" translate>Energiskatt (öre / kWh)</div>
+      <div class="item item-input padding-bottom">
+        <input
+          type="number"
+          ng-keyup="ctrl.keyUp($event)"
+          ng-model="ctrl.energyTax" />
+      </div>
+
       <div class="item item-divider" translate>Från</div>
       <div class="item item-input padding-bottom">
          <input
